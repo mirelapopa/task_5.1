@@ -1,0 +1,79 @@
+// (C) Copyright Renaud Detry       2007-2011.
+
+/**
+
+@ingroup devel
+@defgroup coding_guidelines Coding Guidelines
+
+Please read the following sections carefully before committing new code to the repository.
+
+@section coding_guidelines_conv Conventions
+
+- <b>Never</b> import the <tt>std</tt> namespace. As phrased in <a href="http://www.parashift.com/c++-faq-lite/coding-standards.html#faq-27.5">c++-faq-lite</a>, one should <em>get over it and type <tt>std::</tt></em> &nbsp; :-). Use <tt>std::</tt> even for the symbols which are both in <tt>std::</tt> and in the global namespace (e.g., use <tt>std::cos()</tt> instead of <tt>cos()</tt>).
+
+- <b>Never</b> import any namespace in a header file.
+
+- Avoid importing namespaces directly into the top namespace in implementation files. Imports within the body of a function are ok, but avoiding them is better.
+
+- Use @<bracket@> include directives, i.e., use
+@code
+#include <lib/header.h>
+@endcode
+instead of
+@code
+#include "lib/header.h"
+@endcode
+
+- No dynamic memory allocation (<tt>new Object()</tt>) unless within a smart pointer.
+
+- No <tt>malloc</tt> at all.
+
+- Avoid pointer arithmetic. Iterate STL containers with iterators, unless the index value is needed within the loop.
+
+@section coding_guidelines_style Style
+
+New code should follow this example:
+
+@code
+namespace nuklei {
+  class RegionOfInterest
+  {
+  public:
+    RegionOfInterest(bool positive = true) :
+      positive_(positive) {}
+    
+    virtual ~RegionOfInterest() {}
+    
+    bool contains(const Vector3 &v) const
+    {
+      return (positive_ == contains_(v)) || (next_ && next_->contains(v));
+    }
+  protected:
+    virtual bool contains_(const Vector3 &v) const = 0;
+    bool positive_;
+  private:
+    boost::shared_ptr<RegionOfInterest> next_;
+  };
+}
+@endcode
+
+In particular:
+
+- Two-space indents. <b>No tabs!!</b> Configure your editor to prevent it from inserting tabs.
+
+- Max 80 characters per line.
+
+- Class member variable names end with an underscore:
+@code
+struct C
+{
+  int i_;
+};
+@endcode
+
+@section coding_well Writing Good C++
+
+C++ provides the programmer with a lot of freedom, which brings flexibility, but also danger :-)
+
+The <a href="http://www.parashift.com/c++-faq-lite/">c++-faq</a> draws attention to many subtle issues that can arise in C++.
+*/

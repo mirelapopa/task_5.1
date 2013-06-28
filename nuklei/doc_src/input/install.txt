@@ -1,0 +1,144 @@
+// (C) Copyright Renaud Detry       2007-2011.
+
+/**
+
+@defgroup install Install
+
+@section install_lic License
+
+Before installing, carefully read the licensing terms.
+
+@section install_download Obtaining the Source Code
+
+There is no periodical release. The source code is only available from the Sourceforge version control server:
+@verbatim
+git clone git://nuklei.git.sourceforge.net/gitroot/nuklei/nuklei
+@endverbatim
+
+@subsection install_download_quick Quick Install
+
+At the top level directory (named <em>nuklei</em> if the line above was used to download the code), type
+
+<!-- apt-get install libblas-dev liblapack-dev -->
+
+@verbatim
+./scons.py install
+@endverbatim
+
+<b>If you run into trouble, before asking any question, please read the rest of this page!</b>
+
+@section install_req Requirements
+
+<b>Supported platforms:</b>
+- Linux
+- MacOS X
+
+<b>Supported compilers:</b>
+- GCC 4
+- LLVM/clang
+
+Note that some older versions of the libraries that can be used by Nuklei will not work with clang (e.g., PCL <1.6).
+
+Nuklei is exclusively written in C++.
+
+<b>System requirements:</b>
+As usual, GNUmake, python, pkg-config, bash.
+
+<b>Required nonstandard libraries:</b>
+- <a href="http://www.boost.org/">Boost</a>, version 1.38 and above (tested up to 1.49).
+- <a href="http://www.gnu.org/software/gsl/">GSL</a>. Version 1.8 and above should be ok.
+- BLAS and LAPACK:
+ - OS X: Bundled by default
+ - Linux: most distributions have packages for libblas and liblapack. On Ubuntu,
+   @verbatim apt-get install libblas-dev liblapack-dev @endverbatim
+   Note that you must install the -dev packages, as the libblas3gf package does not install /usr/lib/libblas.so.
+
+If you are using Ubuntu:
+@verbatim
+sudo apt-get install gcc g++ make pkg-config python libgsl0-dev libblas-dev liblapack-dev libboost-all-dev
+@endverbatim
+
+<b>Optional nonstandard libraries:</b>
+- OpenCV 1.0+ (tested up to v2.1).
+ - Enabled with:
+@verbatim
+./scons.py use_opencv=yes
+@endverbatim
+ - Required for: Currently, only required if one makes use of the class PlaneProjection.
+- CGAL 3.3+ (tested up to v4.0).
+ - Enabled with:
+@verbatim
+./scons.py use_cgal=yes
+@endverbatim
+ - Required for: Required for some methods of nuklei::KernelCollection (convex hulls, computing surface normals, plane fitting, search trees other than k-d trees). If at some point your program complains that <em>This function requires CGAL</em>, enable CGAL support.
+- PCL 1.0+ (tested up to v1.5).
+ - Enabled with:
+@verbatim
+./scons.py use_pcl=yes
+@endverbatim
+ - Required for: Reading/writing PCD files.
+
+@section install_proc Build and Install
+
+At the top level, type
+
+@verbatim
+  ./scons.py install
+@endverbatim
+
+If you wish to install under a nonstandard path, e.g., ~/usr, type
+
+@verbatim
+  ./scons.py prefix=$HOME/usr install
+@endverbatim
+
+Boost library names aren't reliable. For example, for the thread
+library, one may find
+
+- libboost_thread.so
+- libboost_thread-mt.so
+- libboost_thread-gcc41-mt.so
+- ...
+
+depending on which install/distribution one is using. The library name
+format may be specified to SCons through the boost_format
+argument. This argument defaults to @"@%s@", which will search
+for Boost libraries named, e.g., under Linux, @"libboost_thread.so@". If
+your boost libraries are named, e.g., @"libboost_thread-gcc41-mt.so@",
+set this argument to \"<tt>\%s-gcc41-mt</tt>\" :
+
+@verbatim
+  ./scons.py boost_format=%s-gcc41-mt
+@endverbatim
+
+When Boost is compiled from source, it installs headers in
+$INCPATH/boost_X_XX/boost. A symlink `boost -> boost_X_XX/boost'
+should be created in $INCPATH.
+
+All libraries are expected to be installed in standard locations. If
+not, make use of the variables CPPFLAGS and LDFLAGS to reference their
+install path in your environment. For instance, if your
+GSL is installed under /sw, and your shell is bash, do
+
+@verbatim
+  export CPPFLAGS="-I/sw/include $CPPFLAGS"
+  export LDFLAGS="-L/sw/lib $LDFLAGS"
+@endverbatim
+
+The install procedure generates a pkg-config file. After install, you will be able to obtain configuration commands for Nuklei as:
+
+@verbatim
+$ pkg-config --cflags --libs nuklei
+@endverbatim
+
+On my system, this command produces
+
+@verbatim
+-I/usr/local/devel/include -L/usr/local/devel/lib -DNUKLEI_TRSL_USE_BSD_BETTER_RANDOM_GENERATOR -lnuklei -lboost_system-mt -lboost_serialization-mt -lboost_iostreams-mt -lboost_thread-mt -lboost_filesystem-mt
+@endverbatim
+
+@section install_doc Building the Documentation
+
+Nuklei is documented in Doxygen-style. The doc stylesheets are written for Doxygen 1.7.
+
+*/

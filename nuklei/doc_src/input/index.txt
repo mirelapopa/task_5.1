@@ -1,0 +1,102 @@
+// (C) Copyright Renaud Detry       2007-2011.
+
+namespace nuklei
+{
+
+/**
+
+@mainpage Kernel Methods for SE(3) Data (a C++ machine-learning library)
+
+<img style="text-align: center;" alt="Logo" src="doc_src/nuklei_logo.jpg">
+
+@section index_overview Overview
+
+Nuklei is a C++ library that implements kernel functions and kernel density estimation for @f$SE(3)@f$ data. Nuklei also provides tools for manipulating @f$SE(3)@f$ transformations, and for manipulating point clouds.
+
+<b>Homepage:</b> <a href="http://nuklei.sourceforge.net/">http://nuklei.sourceforge.net/</a>
+
+<b>Project page:</b> <a href="http://sourceforge.net/projects/nuklei/">http://sourceforge.net/projects/nuklei/</a>
+
+@section index_news News
+
+<dl>
+<dt>2011-05-11</dt>
+<dd>Documentation is improving rapidly. Take a look at the <a href="modules.html">Module</a> page and at the <a href="examples.html">examples</a>.</dd>
+<dt>2011-04-10</dt>
+<dd>Initial release of Nuklei!</dd>
+</dl>
+
+@section index_highlights Highlights
+
+Nuklei includes implementations of efficient algorithms for:
+- Evaluating and simulating Gaussian distributions and von Mises-Fisher distributions.
+- Evaluating and simulating arbitrary @f$ SE(3) @f$ distributions with kernel density estimation.
+- Kernel logistic regression.
+- Reading, writing, transforming clouds of @f$ SE(3) @f$ points.
+
+Potential applications of  @f$ SE(3) @f$ density models:  robot position and orientation (navigation), object pose (pose estimation), gripper pose (grasping).
+
+@section index_get Get Nuklei
+
+The source code is available from the Sourceforge version control server:
+@verbatim
+git clone git://nuklei.git.sourceforge.net/gitroot/nuklei/nuklei
+@endverbatim
+
+For more info, see @ref install "the install page".
+
+@section index_doc Documentation
+
+The @ref background section introduces the mathematical concepts applied in Nuklei (density estimation, kernels, 6D poses,  quaternions, von Mises-Fisher distributions, ...). This is a good starting point for those who are discovering Nuklei. The page to read next is @ref kernels, which explains how these concepts are implemented in Nuklei.
+
+Other resources are available on the <a href="modules.html">Modules</a> page. The central Nuklei classes are KernelCollection and the kernel classes (kernel::base and its subclasses).
+
+@section index_links Links
+
+The <a href="http://code.google.com/p/bingham/">Bingham statistics library</a> provides another open-source implementation of probability distributions on @f$ SO(3) @f$ data. More specifically, <em>The Bingham statistics library contains implementations of the Bingham distribution for directional (axial) statistics on the unit spheres S1, S2, and S3. In addition, finite element approximations are available via tessellations of S2 and S3.</em> If you are looking for an anisotropic, parametric distribution on @f$ SO(3) @f$, check it out at <a href="http://code.google.com/p/bingham/">http://code.google.com/p/bingham/</a>.
+
+
+@section index_license License
+
+Nuklei is distributed under the terms of the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> (GPL).
+
+If the code is used for research purposes, I would appreciate that you cite the following publications:
+- R. Detry, D. Kraft, O. Kroemer, L. Bodenhagen, J. Peters, N. Krüger and J. Piater, Learning Grasp Affordance Densities. In Paladyn. Journal of Behavioral Robotics, 2011.
+@verbatim
+@article{detry2011a,
+Author = {R. Detry and D. Kraft and O. Kroemer and L. Bodenhagen and J. Peters and N. Krüger and J. Piater},
+Journal = {Paladyn.\ Journal of Behavioral Robotics},
+Note = {accepted},
+Title = {Learning Grasp Affordance Densities},
+Year = {2011}}
+@endverbatim
+- R. Detry and J. Piater, Continuous Surface-point Distributions for 3D Object Pose Estimation and Recognition. In Asian Conference on Computer Vision, pages 572–585, 2010.
+@verbatim
+@inproceedings{detry2010c,
+Author = {Renaud Detry and Justus Piater},
+Booktitle = {Asian Conference on Computer Vision},
+Doi = {10.1007/978-3-642-19318-7_45},
+Pages = {572--585},
+Title = {Continuous Surface-point Distributions for {3D} Object Pose Estimation and Recognition},
+Year = {2010}}
+@endverbatim
+
+I will be happy to hear from projects that make use of Nuklei, and if desired participate and provide support to these projects. If your project uses Nuklei, <a href="http://www.csc.kth.se/~detryr/">please let me know!</a>.
+
+
+@section index_author Authors
+
+Nuklei is developped by <a href="http://www.csc.kth.se/~detryr/">Renaud Detry</a>.
+
+
+*/
+
+/**
+
+@example kde_evaluate.cpp
+@example kde_sample.cpp
+@example klr_classify.cpp
+
+*/
+
+}

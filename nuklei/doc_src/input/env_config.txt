@@ -1,0 +1,24 @@
+// (C) Copyright Renaud Detry       2007-2011.
+
+namespace nuklei
+{
+
+/**
+
+@ingroup using
+@defgroup using_env Configuration
+
+The behavior of the functions implemented in Nuklei can be altered through environment variables. The two most important ones are:
+
+- NUKLEI_LOG_LEVEL, which influences how verbose nuklei is. Typing
+@code
+export NUKLEI_LOG_LEVEL=0
+@endcode
+in a shell will make Nuklei silent. The default value is 5.
+
+- NUKLEI_RANDOM_SEED: if set to a value greater than zero, Nuklei will seed its random generators with that value. If equal to -1, Nuklei will seed the random generators with a value based on @c time() and the process ID.
+
+
+*/
+
+}
